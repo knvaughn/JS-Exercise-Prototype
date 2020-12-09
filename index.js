@@ -78,8 +78,15 @@ function Airplane(name) {
     this.tank += gallons;
   }
   Car.prototype.drive = function(distance) {
-    this.odometer += distance;
-    this.tank -= distance/this.milesPerGallon;
+    if(this.tank > 0) {
+      for(let i = 0; i < distance; i++) {
+        this.tank -= 1/this.milesPerGallon;
+        this.odometer += 1;
+        if(this.tank <= 0) {
+          return `I ran out of fuel at ${this.odometer} miles!`;
+        }
+      }
+    }
   }
   
   /*
